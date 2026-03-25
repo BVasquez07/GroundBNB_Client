@@ -1,1 +1,16 @@
-<p>header works!</p>
+<header class="header">
+  <div class="header__logo">
+    <a routerLink="/">
+      <img src="/assets/logo1.svg" alt="Groundbnb" class="header__logo-img" />
+    </a>
+  </div>
+ 
+  <nav class="header__nav">
+    <!-- Navigation pills can be added here as the app grows -->
+  </nav>
+ 
+  <div class="header__auth">
+    <a routerLink="/login" class="header__btn header__btn--outline">Log In</a>
+    <a routerLink="/register" class="header__btn header__btn--filled">Register</a>
+  </div>
+</header>

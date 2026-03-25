@@ -1,1 +1,31 @@
-<p>footer works!</p>
+<footer class="footer">
+  <div class="footer__social">
+    <a href="#" class="footer__social-link" aria-label="X (Twitter)">
+      <img src="assets/icons/x-logo.svg" alt="X" />
+    </a>
+    <a href="#" class="footer__social-link" aria-label="Instagram">
+      <img src="assets/icons/instagram.svg" alt="Instagram" />
+    </a>
+    <a href="#" class="footer__social-link" aria-label="YouTube">
+      <img src="assets/icons/youtube.svg" alt="YouTube" />
+    </a>
+    <a href="#" class="footer__social-link" aria-label="LinkedIn">
+      <img src="assets/icons/linkedin.svg" alt="LinkedIn" />
+    </a>
+  </div>
+
+  <div class="footer__links">
+    <h4 class="footer__links-title">Use cases</h4>
+    <a *ngFor="let link of useCaseLinks" href="#" class="footer__link">{{ link }}</a>
+  </div>
+
+  <div class="footer__links">
+    <h4 class="footer__links-title">Explore</h4>
+    <a *ngFor="let link of exploreLinks" href="#" class="footer__link">{{ link }}</a>
+  </div>
+
+  <div class="footer__links">
+    <h4 class="footer__links-title">Resources</h4>
+    <a *ngFor="let link of resourceLinks" href="#" class="footer__link">{{ link }}</a>
+  </div>
+</footer>
