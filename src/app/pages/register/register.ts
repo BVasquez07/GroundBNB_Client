@@ -3,6 +3,7 @@ import { Router, RouterLink } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { AuthService } from "../../core/services/authService";
 
 @Component({
   selector: "app-register",
@@ -25,6 +26,7 @@ export class Register {
   constructor(
     private router: Router,
     private http: HttpClient,
+    private authService: AuthService,
   ) {}
 
   register() {
@@ -78,5 +80,9 @@ export class Register {
           this.loading = false;
         },
       });
+  }
+
+  signInWithGoogle() {
+    this.authService.googleLogin();
   }
 }
