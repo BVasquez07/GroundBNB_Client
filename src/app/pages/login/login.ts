@@ -13,11 +13,11 @@ interface LoginResponse {
 }
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
   standalone: true,
-  imports: [RouterLink, HeroImage],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  imports: [RouterLink, FormsModule],
+  templateUrl: "./login.html",
+  styleUrl: "./login.scss",
 })
 export class Login {
   email: string = "";
@@ -54,16 +54,16 @@ export class Login {
       .subscribe({
         next: (response) => {
           localStorage.setItem("jwt_token", response.token);
-          localStorage.setItem("user_public_id", response.publicId);
-          localStorage.setItem("user_email", response.email);
-          localStorage.setItem("user_first_name", response.firstName);
-          localStorage.setItem("user_last_name", response.lastName);
-          console.log(response.publicId);
+          localStorage.setItem("customer_public_id", response.publicId);
+          localStorage.setItem("customer_email", response.email);
+          localStorage.setItem("customer_first_name", response.firstName);
+          localStorage.setItem("customer_last_name", response.lastName);
           this.router.navigate(["/profile", response.publicId]);
 
           this.loading = false;
         },
         error: (error) => {
+          console.log(error);
           if (error.error) {
             this.error = error.error;
           } else if (error.message) {
