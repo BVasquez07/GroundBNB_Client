@@ -1,16 +1,30 @@
-<header class="header">
-  <div class="header__logo">
-    <a routerLink="/">
-      <img src="/assets/logo1.svg" alt="Groundbnb" class="header__logo-img" />
-    </a>
-  </div>
- 
-  <nav class="header__nav">
-    <!-- Navigation pills can be added here as the app grows -->
-  </nav>
- 
-  <div class="header__auth">
-    <a routerLink="/login" class="header__btn header__btn--outline">Log In</a>
-    <a routerLink="/register" class="header__btn header__btn--filled">Register</a>
-  </div>
-</header>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">
+        <img src="/assets/logo1.svg" alt="Groundbnb" class="logo-img" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+              aria-current="page">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/listing" routerLinkActive="active">Listings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
+          </li>
+        </ul>
+        <div class="auth-buttons">
+            <button type="button" routerLink="/login" class="btn">Log In</button>
+            <button type="button" routerLink="/register" class="btn">Register</button>
+        </div>
+      </div>
+    </div>
+</nav>

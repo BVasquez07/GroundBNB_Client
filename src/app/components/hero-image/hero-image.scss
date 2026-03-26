@@ -1,0 +1,13 @@
+.hero-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
+  color: white !important;
+  
+  // This ensures all text inside inherits the white color without !important everywhere
+  * {
+    color: white !important;
+  }
+}

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { HeroImage } from '../../components/hero-image/hero-image';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [RouterLink, HeroImage],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })

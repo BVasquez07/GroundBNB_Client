@@ -5,6 +5,7 @@ import { Register } from './pages/register/register';
 import {Listing} from './pages/listing/listing';
 import {Profile} from './pages/profile/profile';
 import {PropertyDetail} from './pages/property-detail/property-detail';
+import { authGuard } from './core/guards/auth-guard';
 
 
 
@@ -26,8 +27,9 @@ export const routes: Routes = [
         component: Listing
     },
     {
-        path: 'profile/:userId',
-        component: Profile
+        path: 'profile',
+        component: Profile,
+        canActivate: [authGuard]
     },
     {
         path: 'property/:id',
