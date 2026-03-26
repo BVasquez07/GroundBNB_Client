@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HeroImage } from '../../components/hero-image/hero-image';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, HeroImage],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
