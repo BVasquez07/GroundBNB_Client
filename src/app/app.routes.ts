@@ -5,6 +5,7 @@ import { Register } from './pages/register/register';
 import {Listing} from './pages/listing/listing';
 import {Profile} from './pages/profile/profile';
 import {PropertyDetail} from './pages/property-detail/property-detail';
+import { authGuard } from './core/guards/auth-guard';
 
 
 
@@ -13,7 +14,7 @@ export const routes: Routes = [
   { path: "login", component: Login },
   { path: "register", component: Register },
   { path: "listing", component: Listing },
-  { path: "profile/:publicId", component: Profile },
+  { path: "profile/:publicId", component: Profile, canActivate: [authGuard] },
   { path: "property/:publicId", component: PropertyDetail },
   { path: "**", redirectTo: "/login" },
 ];

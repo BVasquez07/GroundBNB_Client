@@ -1,0 +1,8 @@
+.card {
+  border-radius: 25px; // The "Boy/Puer" softness
+  
+  img {
+    border-top-left-radius: 23px; // Must be slightly less than the card
+    border-top-right-radius: 23px;
+  }
+}

@@ -1,67 +1,74 @@
-<div>
-    <h2>Login</h2>
-
-    @if (error) {
-        <div>
-          {{ error }}
-        </div>
-    }
-
-    <form (ngSubmit)="register()">
-        <div>
-            <label for="firstName">First Name:</label>
-            <input
-                    type="text"
-                    id="firstName"
-                    [(ngModel)]="firstName"
-                    name="firstName"
-                    required
-                    placeholder="Enter your first name">
-            <label for="lastName">Last Name:</label>
-            <input
-                    type="text"
-                    id="lastName"
-                    [(ngModel)]="lastName"
-                    name="lastName"
-                    required
-                    placeholder="Enter your last name">
-            <label for="email">Email:</label>
-            <input
-                    type="email"
-                    id="email"
-                    [(ngModel)]="email"
-                    name="email"
-                    required
-                    placeholder="Enter your email">
-        </div>
-
-        <div>
-            <label for="password">Password:</label>
-            <input
-                    type="password"
-                    id="password"
-                    [(ngModel)]="password"
-                    name="password"
-                    required
-                    placeholder="Enter your password">
-            <div>
-                <label for="password">Confirm Password:</label>
-                <input
-                        type="password"
-                        id="confirmPassword"
-                        [(ngModel)]="confirmPassword"
-                        name="confirmPassword"
-                        required
-                        placeholder="Confirm your password">
+<div class="v-hero-section">
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-lg-5 py-5">
+            <div class="col-lg-7 text-center text-lg-start">
+                <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">
+                    GroundBNB Sign up
+                </h1>
+                <p class="col-lg-10 fs-4">
+                    Home away from home.
+                </p>
             </div>
-
-            <button type="submit" [disabled]="loading">
-                {{ loading ? 'Registering...' : 'Register' }}
-            </button>
+            <div class="col-md-10 mx-auto col-lg-5">
+                <form (ngSubmit)="register()" class="p-4 p-md-5 rounded-3 ">
+                    <div class="form-floating mb-3">
+                        <type="text"
+                        id="firstName"
+                        [(ngModel)]="firstName"
+                        name="firstName"
+                        required
+                        placeholder="Enter your first name" />
+                        <label for="firstname">First Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text"
+                               class="form-control"
+                               id="lastName"
+                               [(ngModel)]="lastName"
+                               name="lastName"
+                               required
+                               placeholder="Enter your last name" />
+                        <label for="lastname">Last Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email"
+                               class="form-control"
+                               id="email"
+                               [(ngModel)]="email"
+                               name="email"
+                               required
+                               placeholder="Enter your email" />
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password"
+                               class="form-control"
+                               id="password"
+                               [(ngModel)]="password"
+                               name="password"
+                               required
+                               placeholder="Enter your password" />
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label for="password">Confirm Password:</label>
+                        <input
+                                type="password"
+                                class="form-control"
+                                id="confirmPassword"
+                                [(ngModel)]="confirmPassword"
+                                name="confirmPassword"
+                                required
+                                placeholder="Confirm your password">
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="loading">
+                        Register
+                    </button>
+                </form>
+                <div>
+                    Already have an account? <a routerLink="/login">Login here</a>
+                </div>
+            </div>
         </div>
-    </form>
-
-    <div>
-        Already have an account? <a routerLink="/login">Login here</a>
     </div>
 </div>

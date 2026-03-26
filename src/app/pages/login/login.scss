@@ -1,0 +1,18 @@
+.v-hero-section {
+  /* The image path */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                    url('/assets/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; // Makes it take up the full height of the viewport
+  display: flex;
+  align-items: center; // Vertically centers the container
+  /* Ensure text is readable */
+  color: white !important;
+}
+
+.v-hero-section .text-body-emphasis, 
+.v-hero-section .lead {
+  color: white !important;
+}

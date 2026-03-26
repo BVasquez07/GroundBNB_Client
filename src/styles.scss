@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@use "sass:map";
+
+$my-theme-overrides: (
+  "primary": #353433, 
+  "enable-shadows": true,
+  "border-radius": 10px     // Sharp, jagged edges
+);
+
+@use "bootstrap/scss/bootstrap" with (
+  $primary: map.get($my-theme-overrides, "primary"),
+  $enable-shadows: map.get($my-theme-overrides, "enable-shadows"),
+  $border-radius: map.get($my-theme-overrides, "border-radius")
+);
+
+body {
+  margin: 0;
+  font-family: var(--bs-body-font-family);
+  background-color: #f8f9fa;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;       // Set your desired consistent height
+  object-fit: cover;   // This "crops" the image to fill the 200px height without distortion
+  object-position: center; // Keeps the center of the image visible
+}

@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
+import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { HeroImage } from '../../components/hero-image/hero-image';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 
@@ -12,10 +13,11 @@ interface LoginResponse {
 }
 
 @Component({
-  selector: "app-login",
+  selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterLink],
-  templateUrl: "./login.html",
+  imports: [RouterLink, HeroImage],
+  templateUrl: './login.html',
+  styleUrl: './login.scss',
 })
 export class Login {
   email: string = "";
