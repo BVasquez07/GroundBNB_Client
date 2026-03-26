@@ -89,7 +89,7 @@ export class AuthService {
   }
 
   googleLogin(): void {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = environment.googleOAuthUrl;
   }
 
   handleOAuthCallback(params: any): void {

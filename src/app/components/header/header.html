@@ -26,12 +26,12 @@
         @if (isLoggedIn) {
           <div class="user-menu">
               <span class="user-name">Welcome, {{ userName }}</span>
-              <button (click)="logout()" class="btn mx-4">Logout</button>
+              <button (click)="logout()" class="btn mx-4 btn-primary shadow-sm">Logout</button>
           </div>
         } @else {
-            <div class="auth-buttons">
-                <button type="button" routerLink="/login" class="btn">Log In</button>
-                <button type="button" routerLink="/register" class="btn">Register</button>
+            <div class="auth-buttons d-flex gap-2">
+                <button type="button" routerLink="/login" class="btn btn-primary shadow-sm">Log In</button>
+                <button type="button" routerLink="/register" class="btn btn-primary shadow-sm">Register</button>
             </div>
         }
       </div>
