@@ -9,32 +9,11 @@ import {PropertyDetail} from './pages/property-detail/property-detail';
 
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: Home
-    },
-    {
-        path: 'login',
-        component: Login
-    },
-    {
-        path: 'register',
-        component: Register
-    },
-    {
-        path: 'listing',
-        component: Listing
-    },
-    {
-        path: 'profile/:userId',
-        component: Profile
-    },
-    {
-        path: 'property/:id',
-        component: PropertyDetail
-    },
-    {
-        path: '**',
-        redirectTo: '/login'
-    }
+  { path: "", component: Home },
+  { path: "login", component: Login },
+  { path: "register", component: Register },
+  { path: "listing", component: Listing },
+  { path: "profile/:publicId", component: Profile },
+  { path: "property/:publicId", component: PropertyDetail },
+  { path: "**", redirectTo: "/login" },
 ];

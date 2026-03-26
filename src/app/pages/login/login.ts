@@ -1,17 +1,76 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component } from "@angular/core";
+import { Router, RouterLink } from "@angular/router";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+
+interface LoginResponse {
+  token: string;
+  publicId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}
 
 @Component({
-  selector: 'app-login',
-  imports: [RouterLink],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  selector: "app-login",
+  standalone: true,
+  imports: [FormsModule, RouterLink],
+  templateUrl: "./login.html",
 })
 export class Login {
-  constructor(private router: Router) {}  
+  email: string = "";
+  password: string = "";
+  error: string = "";
+  loading: boolean = false;
 
-  onLogin (userPayload: {user: string, password: string}):void {
-    // Simulate successful login and navigate to the home page
-    this.router.navigate(['/']);
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+  ) {}
+
+  login() {
+    this.loading = true;
+    this.error = "";
+
+    const loginData = {
+      email: this.email,
+      password: this.password,
+    };
+
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+
+    this.http
+      .post<LoginResponse>(
+        "http://localhost:8080/api/customers/login",
+        loginData,
+        {
+          headers: headers,
+        },
+      )
+      .subscribe({
+        next: (response) => {
+          localStorage.setItem("jwt_token", response.token);
+          localStorage.setItem("user_public_id", response.publicId);
+          localStorage.setItem("user_email", response.email);
+          localStorage.setItem("user_first_name", response.firstName);
+          localStorage.setItem("user_last_name", response.lastName);
+          console.log(response.publicId);
+          this.router.navigate(["/profile", response.publicId]);
+
+          this.loading = false;
+        },
+        error: (error) => {
+          if (error.error) {
+            this.error = error.error;
+          } else if (error.message) {
+            this.error = error.message;
+          } else {
+            this.error = "Invalid email or password";
+          }
+          this.loading = false;
+        },
+      });
   }
-}12
+}
