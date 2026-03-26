@@ -6,7 +6,6 @@
   min-height: 100vh; 
   color: white !important;
   
-  // This ensures all text inside inherits the white color without !important everywhere
   * {
     color: white !important;
   }

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/">
-        <img src="/assets/logo1.svg" alt="Groundbnb" class="logo-img" />
+        <img ngSrc="/assets/logo1.svg" alt="Groundbnb" class="logo-img" height="414" width="383"/>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,9 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-              aria-current="page">Home</a>
+              aria-current="page">
+                Home
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/listing" routerLinkActive="active">Listings</a>
@@ -21,10 +23,17 @@
             <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
           </li>
         </ul>
-        <div class="auth-buttons">
-            <button type="button" routerLink="/login" class="btn">Log In</button>
-            <button type="button" routerLink="/register" class="btn">Register</button>
-        </div>
+        @if (isLoggedIn) {
+          <div class="user-menu">
+              <span class="user-name">Welcome, {{ userName }}</span>
+              <button (click)="logout()" class="btn mx-4">Logout</button>
+          </div>
+        } @else {
+            <div class="auth-buttons">
+                <button type="button" routerLink="/login" class="btn">Log In</button>
+                <button type="button" routerLink="/register" class="btn">Register</button>
+            </div>
+        }
       </div>
     </div>
 </nav>
