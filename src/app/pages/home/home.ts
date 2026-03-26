@@ -5,7 +5,7 @@ import { HeroImage } from '../../components/hero-image/hero-image';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CommonModule, HeroImage],
+  imports: [CommonModule, HeroImage],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

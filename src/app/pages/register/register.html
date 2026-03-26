@@ -10,30 +10,64 @@
                 </p>
             </div>
             <div class="col-md-10 mx-auto col-lg-5">
-                <form class="p-4 p-md-5 rounded-3 ">
+                <form (ngSubmit)="register()" class="p-4 p-md-5 rounded-3 ">
                     <div class="form-floating mb-3">
-                        <input type="First Name" class="form-control" id="firstname" required
-                            placeholder="John" />
+                        <input  type="text"
+                                class="form-control"
+                                id="firstName"
+                                [(ngModel)]="firstName"
+                                name="firstName"
+                                required
+                                placeholder="Enter your first name" />
                         <label for="firstname">First Name</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="Last Name" class="form-control" id="lastname" required
-                            placeholder="John" />
+                        <input type="text"
+                               class="form-control"
+                               id="lastName"
+                               [(ngModel)]="lastName"
+                               name="lastName"
+                               required
+                               placeholder="Enter your last name" />
                         <label for="lastname">Last Name</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required
-                            placeholder="name@example.com" />
+                        <input type="email"
+                               class="form-control"
+                               id="email"
+                               [(ngModel)]="email"
+                               name="email"
+                               required
+                               placeholder="Enter your email" />
                         <label for="floatingInput">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" required
-                            placeholder="Password" />
+                        <input type="password"
+                               class="form-control"
+                               id="password"
+                               [(ngModel)]="password"
+                               name="password"
+                               required
+                               placeholder="Enter your password" />
                         <label for="floatingPassword">Password</label>
                     </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">
-                        Sign in
+                    <div class="form-floating mb-3">
+                        <label for="password">Confirm Password:</label>
+                        <input
+                                type="password"
+                                class="form-control"
+                                id="confirmPassword"
+                                [(ngModel)]="confirmPassword"
+                                name="confirmPassword"
+                                required
+                                placeholder="Confirm your password">
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="loading">
+                        Register
                     </button>
+                    <small class="text-white">Already have an account? Login
+                        <a class="text-white" routerLink="/login">here</a>.
+                    </small>
                 </form>
             </div>
         </div>

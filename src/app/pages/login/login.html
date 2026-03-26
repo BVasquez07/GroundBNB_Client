@@ -10,15 +10,25 @@
                 </p>
             </div>
             <div class="col-md-10 mx-auto col-lg-5">
-                <form class="p-4 p-md-5 rounded-3 ">
+                <form (ngSubmit)="login()" class="p-4 p-md-5 rounded-3">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required
-                            placeholder="name@example.com" />
+                        <input type="email"
+                               id="email"
+                               class="form-control"
+                               [(ngModel)]="email"
+                               name="email"
+                               required
+                               placeholder="Enter your email" />
                         <label for="floatingInput">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" required
-                            placeholder="Password" />
+                        <input type="password"
+                               id="password"
+                               class="form-control"
+                               [(ngModel)]="password"
+                               name="password"
+                               required
+                               placeholder="Enter your password" />
                         <label for="floatingPassword">Password</label>
                     </div>
                     <div class="checkbox mb-3">
@@ -26,9 +36,12 @@
                             <input type="checkbox" value="remember-me" /> Remember me
                         </label>
                     </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="loading">
                         Sign in
                     </button>
+                    <small class="text-white">You have no account yet? Sign Up
+                        <a class="text-white" routerLink="/register">here</a>.
+                    </small>
                 </form>
             </div>
         </div>

@@ -5,7 +5,7 @@ import {ImageFallbackDirective} from '../../directives/image-fallback';
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink, ImageFallbackDirective],
+  imports: [ImageFallbackDirective],
   templateUrl: './footer.html',
   styleUrl: './footer.scss'
 })
