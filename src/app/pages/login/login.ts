@@ -1,12 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, RouterLink, ActivatedRoute } from "@angular/router";
 import { FormsModule } from "@angular/forms";
+import { HttpErrorResponse } from "@angular/common/http";
+import { CommonModule } from "@angular/common";
 import { AuthService, LoginResponse } from "../../core/services/authService";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: "./login.html",
   styleUrl: "./login.scss",
 })
@@ -47,8 +49,8 @@ export class Login implements OnInit {
           this.router.navigate(["/profile", response.publicId]);
           this.loading = false;
         },
-        error: (error) => {
-          this.error = error.error || "Invalid email or password";
+        error: (error: HttpErrorResponse) => {
+          this.error = this.resolveLoginError(error);
           this.loading = false;
         },
       });
@@ -56,5 +58,24 @@ export class Login implements OnInit {
 
   signInWithGoogle() {
     this.authService.googleLogin();
+  }
+
+  private resolveLoginError(error: HttpErrorResponse): string {
+    const backendMessage =
+      typeof error.error === "string" ? error.error : error.error?.message;
+    const normalizedMessage = backendMessage?.toLowerCase() || "";
+
+    if (
+      error.status === 401 ||
+      error.status === 403 ||
+      normalizedMessage.includes("invalid") ||
+      normalizedMessage.includes("bad credentials") ||
+      normalizedMessage.includes("wrong password") ||
+      normalizedMessage.includes("not found")
+    ) {
+      return "Invalid email or password.";
+    }
+
+    return backendMessage || "Login failed. Please try again.";
   }
 }
