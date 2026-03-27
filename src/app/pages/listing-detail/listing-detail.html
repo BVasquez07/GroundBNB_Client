@@ -1,0 +1,183 @@
+
+<div class="container my-5">
+    <h1 class="fs-1">listing-detail with id: {{ listingId }}</h1>
+    <div class="row g-2"> <div class="col-md-6">
+            <img src="assets/house1.jpg" class="img-fluid rounded w-200 h-200 main-hero-img" alt="Main Layout">
+        </div>
+
+        <div class="col-md-6">
+            <div class="row g-2">
+                <div class="col-6">
+                    <img src="assets/house2.jpg" class="img-fluid rounded w-100 grid-img" alt="Sub 1">
+                </div>
+                <div class="col-6">
+                    <img src="assets/house2.jpg" class="img-fluid rounded w-100 grid-img" alt="Sub 2">
+                </div>
+                <div class="col-6">
+                    <img src="assets/house2.jpg" class="img-fluid rounded w-100 grid-img" alt="Sub 3">
+                </div>
+                <div class="col-6">
+                    <img src="assets/house2.jpg" class="img-fluid rounded w-100 grid-img" alt="Sub 4">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-between align-items-start">
+        
+        <div class="col-auto">
+            <div style="">
+                <div class="card-body">
+                    <h2 class="card-title text-start">Cottage in the Woods!</h2>
+                    <h2 class="card-subtitle mb-2 fw-bold text-start">$50/night</h2>
+                    <p class="card-text text-start">A wonderful cottage nestled in the woods, perfect for a peaceful getaway.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div class="card shadow-sm" style="width: 22rem;"> <div class="card-body p-4"> <div class="border rounded mb-3">
+                        
+                        <div class="row g-0 border-bottom"> <div class="col-6 border-end p-3">
+                                <label class="form-label d-block text-muted small mb-0">Check-In</label>
+                                <input type="date" [(ngModel)]="checkInDate" class="form-control border-0 p-0 fs-5" required>
+                            </div>
+                            
+                            <div class="col-6 p-3">
+                                <label class="form-label d-block text-muted small mb-0">Check-Out</label>
+                                <input type="date" [(ngModel)]="checkOutDate" class="form-control border-0 p-0 fs-5" value="3/24/2026" required>
+                            </div>
+                        </div>
+
+                        <div class="p-3">
+                            <label class="form-label d-block text-muted small mb-0">Guests</label>
+                            <input type="text" [(ngModel)]="guests" class="form-control border-0 p-0 fs-5" value="1" placeholder="1" required>
+                        </div>
+                    </div> <div class="d-grid gap-2"> <button class="btn btn-dark btn-lg" routerLink="/booking" [queryParams]="{ checkIn: checkInDate, checkOut: checkOutDate, guests: guests }" type="button">Reserve</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container text-center mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="accordion" id="accordionOne">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#contentOne">
+                            Description
+                        </button>
+                    </h2>
+                    <div id="contentOne" class="accordion-collapse collapse show" data-bs-parent="#accordionOne">
+                        <div class="accordion-body">
+                            Content for the first column.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="accordion" id="accordionTwo">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contentTwo">
+                            Amenities
+                        </button>
+                    </h2>
+                    <div id="contentTwo" class="accordion-collapse collapse" data-bs-parent="#accordionTwo">
+                        <div class="accordion-body">
+                            Content for the second column.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="accordion" id="accordionThree">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contentThree">
+                            Reviews
+                        </button>
+                    </h2>
+                    <div id="contentThree" class="accordion-collapse collapse" data-bs-parent="#accordionThree">
+                        <div class="accordion-body">
+                            Content for the third column.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container mb-5">
+    <h2 class="fs-2 mt-2 mb-2">Latest Review(s)</h2>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="card mx-5" style="width: 18rem;">
+                <div class="profile-container d-flex flex-column align-items-center">
+                    <div class="profile-circle shadow-sm mb-3">
+                        <img src="assets/headshot.jpg" appImageFallback class="profile-img" alt="User Profile">
+                    </div>
+
+                    <h3 class="h5 fw-bold mb-0">Kumalala</h3>
+                    <p class="text-muted small">Host since 2026</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card’s content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="card mx-5" style="width: 18rem;">
+                <div class="profile-container d-flex flex-column align-items-center">
+                    <div class="profile-circle shadow-sm mb-3">
+                        <img src="assets/headshot.jpg" appImageFallback class="profile-img" alt="User Profile">
+                    </div>
+
+                    <h3 class="h5 fw-bold mb-0">Kumalala</h3>
+                    <p class="text-muted small">Host since 2026</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card’s content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="card mx-5" style="width: 18rem;">
+                <div class="profile-container d-flex flex-column align-items-center">
+                    <div class="profile-circle shadow-sm mb-3">
+                        <img src="assets/headshot.jpg" appImageFallback class="profile-img" alt="User Profile">
+                    </div>
+
+                    <h3 class="h5 fw-bold mb-0">Kumala Savesta</h3>
+                    <p class="text-muted small">Host since 2026</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card’s content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

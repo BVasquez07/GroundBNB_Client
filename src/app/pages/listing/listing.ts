@@ -15,21 +15,63 @@ export class Listing {
       title: 'Cozy Cabin in the Woods',
       description: 'A charming cabin surrounded by nature, perfect for a weekend getaway.',
       price: 120,
-      imageUrl: 'https://example.com/images/cabin.jpg'
+      imageUrl: '/assets/house1.jpg'
     },
     {
       id: 2,
       title: 'Modern Apartment in the City',
       description: 'A sleek apartment located in the heart of downtown, close to all amenities.',
       price: 200,
-      imageUrl: 'https://example.com/images/apartment.jpg'
+      imageUrl: '/assets/house2.jpg'
     },
     {
       id: 3,
       title: 'Beachfront Villa',
       description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
       price: 350,
-      imageUrl: 'https://example.com/images/villa.jpg'
-    }
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 4,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 5,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 6,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 7,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 8,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 9,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
   ];
 }

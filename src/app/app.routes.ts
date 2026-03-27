@@ -4,8 +4,9 @@ import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { Listing } from './pages/listing/listing';
 import { Profile } from './pages/profile/profile';
-import { PropertyDetail } from './pages/property-detail/property-detail';
+import { ListingDetail } from './pages/listing-detail/listing-detail';
 import { authGuard } from './core/guards/auth-guard';
+import { Bookings } from './pages/bookings/bookings';
 
 export const routes: Routes = [
   { path: "", component: Home },
@@ -24,16 +25,23 @@ export const routes: Routes = [
       import("./pages/listing/listing").then((a) => a.Listing),
   },
   {
-    path: "profile/:publicId",
+    path: "profile",
     loadComponent: () =>
       import("./pages/profile/profile").then((a) => a.Profile),
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   {
-    path: "property/:publicId",
+    path: "listingDetail/:id",
     loadComponent: () =>
-      import("./pages/property-detail/property-detail").then(
-        (a) => a.PropertyDetail,
+      import("./pages/listing-detail/listing-detail").then(
+        (a) => a.ListingDetail,
+      ),
+  },
+  {
+    path: "booking",
+    loadComponent: () =>
+      import("./pages/bookings/bookings").then(
+        (a) => a.Bookings,
       ),
   },
   { path: "**", redirectTo: "/login" },

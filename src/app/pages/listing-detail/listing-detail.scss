@@ -1,0 +1,42 @@
+/* Adjust this height to whatever looks best for your design */
+.main-hero-img {
+    height: 500px !important; 
+    object-fit: cover;
+}
+
+.grid-img {
+    /* Each small image is exactly half the height of the large one (minus the gap) */
+    height: calc(250px - 0.25rem); 
+    object-fit: cover;
+}
+
+/* On mobile, let them stack normally so they don't look like tiny slivers */
+@media (max-width: 768px) {
+    .main-hero-img, .grid-img {
+        height: 250px !important;
+    }
+}
+
+.profile-circle {
+  width: 90px;         // Adjust size as needed
+  height: 90px;
+  border-radius: 50% !important; // Forces circle despite global '0' setting
+  overflow: hidden;     // Crops the image to the circle
+  border: 3px solid #ffffff;
+  background-color: var(--bs-primary); // Falls back to your Violet color
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    // Prevents stretching the face
+  object-position: center;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
