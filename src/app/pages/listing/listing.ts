@@ -30,6 +30,48 @@ export class Listing {
       description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
       price: 350,
       imageUrl: '/assets/house3.jpg'
-    }
+    },
+    {
+      id: 4,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 5,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 6,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 7,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 8,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
+    {
+      id: 9,
+      title: 'Beachfront Villa',
+      description: 'A luxurious villa with stunning ocean views, ideal for a relaxing vacation.',
+      price: 350,
+      imageUrl: '/assets/house3.jpg'
+    },
   ];
 }

@@ -1,0 +1,33 @@
+
+.form-control {
+  background-color: #fcfcfc;
+  border-color: #f0f0f0;
+  color: #333;
+
+  &::placeholder {
+    color: #6c757d;
+    font-size: 0.95rem;
+  }
+
+  &:focus {
+    box-shadow: none;
+    border-color: var(--bs-primary);
+  }
+}
+
+.card {
+  border: 1px solid #eee !important;
+}
+
+.border.rounded-3 {
+  small {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #000;
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
