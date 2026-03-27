@@ -5,10 +5,9 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh; // Makes it take up the full height of the viewport
+  min-height: 100vh;
   display: flex;
-  align-items: center; // Vertically centers the container
-  /* Ensure text is readable */
+  align-items: center;
   color: white !important;
 }
 

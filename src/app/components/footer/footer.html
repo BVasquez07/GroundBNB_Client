@@ -1,31 +1,37 @@
 <footer class="footer">
-  <div class="footer__social">
-    <a href="#" class="footer__social-link" aria-label="X (Twitter)">
-      <img src="assets/icons/x-logo.svg" appImageFallback alt="X" />
+  <div class="footer__social d-flex gap-2">
+    <a href="#" class="footer__social-link btn btn-light shadow-sm rounded-circle p-2" aria-label="X (Twitter)">
+      <img src="/assets/icons/x-logo.png" appImageFallback alt="X" />
     </a>
-    <a href="#" class="footer__social-link" aria-label="Instagram">
-      <img src="assets/icons/instagram.svg" appImageFallback alt="Instagram" />
+    <a href="#" class="footer__social-link btn btn-light shadow-sm rounded-circle p-2" aria-label="Instagram">
+      <img src="/assets/icons/instagram.png" appImageFallback alt="Instagram" />
     </a>
-    <a href="#" class="footer__social-link" aria-label="YouTube">
-      <img src="assets/icons/youtube.svg" appImageFallback alt="YouTube" />
+    <a href="#" class="footer__social-link btn btn-light shadow-sm rounded-circle p-2" aria-label="YouTube">
+      <img src="/assets/icons/youtube.png" appImageFallback alt="YouTube" />
     </a>
-    <a href="#" class="footer__social-link" aria-label="LinkedIn">
-      <img src="assets/icons/linkedin.svg" appImageFallback alt="LinkedIn" />
+    <a href="#" class="footer__social-link btn btn-light shadow-sm rounded-circle p-2" aria-label="LinkedIn">
+      <img src="/assets/icons/facebook.png" appImageFallback alt="Facebook" />
     </a>
   </div>
 
   <div class="footer__links">
     <h4 class="footer__links-title">Use cases</h4>
-    <a *ngFor="let link of useCaseLinks" href="#" class="footer__link">{{ link }}</a>
+    @for (link of useCaseLinks; track link) {
+      <a href="#" class="footer__link">{{ link }}</a>
+    }
   </div>
 
   <div class="footer__links">
     <h4 class="footer__links-title">Explore</h4>
-    <a *ngFor="let link of exploreLinks" href="#" class="footer__link">{{ link }}</a>
+    @for (link of exploreLinks; track link) {
+      <a href="#" class="footer__link">{{ link }}</a>
+    }
   </div>
 
   <div class="footer__links">
     <h4 class="footer__links-title">Resources</h4>
-    <a *ngFor="let link of resourceLinks" href="#" class="footer__link">{{ link }}</a>
+    @for (link of resourceLinks; track link) {
+      <a href="#" class="footer__link">{{ link }}</a>
+    }
   </div>
 </footer>
