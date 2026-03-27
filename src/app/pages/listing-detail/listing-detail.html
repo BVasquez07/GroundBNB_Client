@@ -54,7 +54,7 @@
 
                         <div class="p-3">
                             <label class="form-label d-block text-muted small mb-0">Guests</label>
-                            <input type="text" [(ngModel)]="guests" class="form-control border-0 p-0 fs-5" value="1" placeholder="1" required>
+                            <input type="text" [(ngModel)]="guests" class="form-control border-0 p-0 fs-5" value="1" placeholder="1" min="1" required>
                         </div>
                     </div> <div class="d-grid gap-2"> <button class="btn btn-dark btn-lg" routerLink="/booking" [queryParams]="{ checkIn: checkInDate, checkOut: checkOutDate, guests: guests }" type="button">Reserve</button>
                     </div>
