@@ -93,10 +93,6 @@ export class AuthService {
   }
 
   handleOAuthCallback(params: any): void {
-    console.log(
-      "AuthService - handleOAuthCallback called with params:",
-      params,
-    );
     if (params.token) {
       const response: LoginResponse = {
         token: params.token,
@@ -105,10 +101,8 @@ export class AuthService {
         firstName: params.firstName,
         lastName: params.lastName,
       };
-      console.log("AuthService - calling setAuthData with:", response);
       this.setAuthData(response);
     } else {
-      console.log("AuthService - no token found in params");
     }
   }
 

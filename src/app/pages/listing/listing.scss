@@ -1,8 +1,37 @@
-.card {
-  border-radius: 25px;
-  
-  img {
-    border-top-left-radius: 23px;
-    border-top-right-radius: 23px;
+.listing-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   }
+
+  a {
+    color: inherit;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .stars {
+    color: #fbbf24;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+  }
+}
+
+.sticky-top {
+  z-index: 1000;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #dee2e6;
+  box-shadow: 0 0 0 0.2rem rgba(53, 52, 51, 0.1);
 }

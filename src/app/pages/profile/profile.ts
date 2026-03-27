@@ -1,63 +1,105 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "../../core/services/authService";
+import { Component, OnInit, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ActivatedRoute, RouterLink } from "@angular/router";
+import { AuthService, User } from "../../core/services/authService";
+import {
+  ReservationService,
+  Reservation,
+} from "../../core/services/reservationService";
+import { ListingService } from "../../core/services/listingService";
+import { Listing } from "../listing/listing";
+
+interface Review {
+  id: number;
+  rating: number;
+  comment: string;
+  listingTitle: string;
+  createdAt: string;
+}
 
 @Component({
   selector: "app-profile",
-  imports: [RouterLink, CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: "./profile.html",
-  styleUrls: ["./profile.scss"],
+  styleUrl: "./profile.scss",
 })
 export class Profile implements OnInit {
-  publicId: string = "";
-  
-  
-  public pastExperienceReviews: Array<any> = [
-    {
-      gaveRating: true,
-      experienceTitle: 'Paint and Sip',
-      Image: 'assets/event1.jpg',
-      price: 4,
-      rating: 5,
-    },
-    {
-      gaveRating: true,
-      experienceTitle: 'Beach House',
-      Image: 'assets/house1.jpg',
-      price: 4,
-      rating: 5,
-    },
-    {
-      gaveRating: false,
-      experienceTitle: 'Cabin out in Seattle, WA',
-      Image: 'assets/house2.jpg',
-      price: 4,
-      rating: 5,
-    },
-  ]; 
+  private route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
+  private reservationService = inject(ReservationService);
+  private listingService = inject(ListingService);
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService,
-  ) {}
+  user: User | null = null;
+  reservations: Reservation[] = [];
+  reviews: Review[] = [];
+  listings: Listing[] = [];
+
+  loadingReservations: boolean = true;
+  loadingReviews: boolean = true;
+  loadingListings: boolean = true;
 
   ngOnInit() {
-    this.publicId = this.route.snapshot.paramMap.get("publicId") || "";
+    const publicId = this.route.snapshot.paramMap.get("publicId");
+    const currentUser = this.authService.getCurrentUser();
 
-    this.route.queryParams.subscribe((params) => {
-      if (params["token"]) {
-        this.authService.handleOAuthCallback({
-          token: params["token"],
-          publicId: this.publicId,
-          email: params["email"],
-          firstName: params["firstName"],
-          lastName: params["lastName"],
-        });
+    if (currentUser && currentUser.publicId === publicId) {
+      this.user = currentUser;
+      this.loadUserData();
+    } else {
+      this.loadingReservations = false;
+      this.loadingReviews = false;
+      this.loadingListings = false;
+    }
+  }
 
-        this.router.navigate(["/profile", this.publicId], { replaceUrl: true });
-      }
+  loadUserData() {
+    this.loadReservations();
+    this.loadReviews();
+    this.loadListings();
+  }
+
+  loadReservations() {
+    this.reservationService.getUserReservations().subscribe({
+      next: (data) => {
+        this.reservations = data;
+        this.loadingReservations = false;
+      },
+      error: (err) => {
+        console.error("Error loading reservations:", err);
+        this.loadingReservations = false;
+      },
     });
+  }
+
+  loadReviews() {
+    // TODO: Implement reviews endpoint
+    // For now using sample data
+    this.reviews = [];
+    this.loadingReviews = false;
+  }
+
+  loadListings() {
+    this.listingService.getAllListings().subscribe({
+      next: (data) => {
+        this.listings = data;
+        this.loadingListings = false;
+      },
+      error: (err) => {
+        console.error("Error loading listings:", err);
+        this.loadingListings = false;
+      },
+    });
+  }
+
+  getStars(rating: number): number[] {
+    return new Array(Math.floor(rating));
+  }
+
+  cancelReservation(reservationId: number) {
+    if (confirm("Are you sure you want to cancel this reservation?")) {
+      // TODO: Implement cancel reservation API
+      console.log("Cancel reservation:", reservationId);
+    }
   }
 }
