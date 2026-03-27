@@ -49,21 +49,17 @@
             <div class="row g-0 text-center border-bottom">
             <div class="col p-2 border-end">
                 <small class="d-block fw-bold text-uppercase" style="font-size: 0.7rem;">Check-In</small>
-                <input type="date" class="form-control border-0 p-0 fs-5" value="{{ checkInDate }}" required>
+                <input type="date" (change)="onCheckInDateChange($event)" class="form-control border-0 p-0 fs-5" value="{{ checkInDate }}" required>
             </div>
             <div class="col p-2">
                 <small class="d-block fw-bold text-uppercase" style="font-size: 0.7rem;">Check-Out</small>
-                <input type="date" class="form-control border-0 p-0 fs-5" value="{{ checkOutDate }}" required>
+                <input type="date" (change)="onCheckOutDateChange($event)" class="form-control border-0 p-0 fs-5" value="{{ checkOutDate }}" required>
             </div>
             </div>
             
             <div class="p-2 d-flex justify-content-between align-items-center">
               <span class="fw-bold px-2">Guests</span>
-              <select formControlName="selectedGuests" class="form-select border-0 w-auto">
-                <option [value]="1">1 guest</option>
-                <option [value]="2">2 guests</option>
-                <option [value]="3">3 guests</option>
-              </select>
+              <input type="text" (change)="onGuestsChange($event)" class="form-control border-0 p-0 fs-5" value="1" placeholder="1" min="1" required>
             </div>
           </div>
 
@@ -80,7 +76,7 @@
 
           <div class="d-flex justify-content-between pt-3 fw-bold fs-5">
             <span>Total</span>
-            <span>${{ (numberOfNights * price) + taxes }}</span>
+            <span>${{ (numberOfNights * price) + taxes + guestSurcharge }}</span>
           </div>
         </div>
       </div>
