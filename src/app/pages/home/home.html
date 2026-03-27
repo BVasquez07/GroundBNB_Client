@@ -1,39 +1,47 @@
 <app-hero-image/>
 
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="/assets/host.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Host your property</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm hover-lift">
+                <img src="/assets/host.jpg" class="card-img-top rounded-top-3" alt="Host your property" style="height: 220px; object-fit: cover;">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-house-heart fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="card-title fw-bold mb-3">Host your property</h5>
+                    <p class="card-text text-muted">Turn your space into an income stream. Join thousands of hosts who earn extra money sharing their home.</p>
+                    <a routerLink="/listing" class="btn btn-outline-primary rounded-pill px-4 mt-2">Get started</a>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="/assets/house1.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Book your dream stay!</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
 
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm hover-lift">
+                <img src="/assets/listings/house1.jpg" class="card-img-top rounded-top-3" alt="Book your dream stay" style="height: 220px; object-fit: cover;">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-calendar-check fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="card-title fw-bold mb-3">Book your dream stay</h5>
+                    <p class="card-text text-muted">Discover unique places to stay around the world. From cozy cabins to luxury villas, find your perfect getaway.</p>
+                    <a routerLink="/listing" class="btn btn-outline-primary rounded-pill px-4 mt-2">Explore listings</a>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="/assets/event1.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Connect with locals</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
 
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm hover-lift">
+                <img src="/assets/listings/event1.jpg" class="card-img-top rounded-top-3" alt="Connect with locals" style="height: 220px; object-fit: cover;">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-people fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="card-title fw-bold mb-3">Connect with locals</h5>
+                    <p class="card-text text-muted">Experience authentic travel by connecting with local hosts who know the best spots and hidden gems.</p>
+                    <a routerLink="/listing" class="btn btn-outline-primary rounded-pill px-4 mt-2">Discover experiences</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

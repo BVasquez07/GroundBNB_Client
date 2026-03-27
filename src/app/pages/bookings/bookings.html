@@ -1,89 +1,143 @@
 <h1 class="display-5 fw-bold text-body-emphasis px-4 pt-4">Confirm and Pay</h1>
 
 <div class="container py-5">
-  <form [formGroup]="bookingForm" (ngSubmit)="onBook()">
-    <div class="row g-5">
-      
-      <div class="col-lg-7">
-        <div class="card border-0 shadow-sm p-4 h-100">
-          <h2 class="mb-4 fw-bold">Payment</h2>
-          
-          <div class="mb-3">
-            <input type="text" formControlName="cardNumber" class="form-control form-control-lg rounded-pill px-4" placeholder="Card number">
-          </div>
-          
-          <div class="mb-3">
-            <input type="text" formControlName="holderName" class="form-control form-control-lg rounded-pill px-4" placeholder="Account Holder name">
-          </div>
-
-          <div class="row mb-3">
-            <div class="col">
-              <input type="text" formControlName="expiryMonth" class="form-control form-control-lg rounded-pill px-4" placeholder="MM">
+    @if (loading) {
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
-            <div class="col border-start">
-              <input type="text" formControlName="expiryYear" class="form-control form-control-lg rounded-pill px-4" placeholder="YYYY">
-            </div>
-          </div>
-
-          <div class="mb-5">
-            <input type="text" formControlName="cvv" class="form-control form-control-lg rounded-pill px-4" placeholder="CVV">
-          </div>
-
-          <button class="btn btn-dark btn-lg w-100 py-3 rounded-3 fw-bold" type="submit" >
-            Book Now
-          </button>
+            <p class="mt-3 text-muted">Loading booking details...</p>
         </div>
-      </div>
+    }
 
-      <div class="col-lg-5">
-        <div class="card border-0 shadow-sm p-4 h-100">
-          <div class="d-flex align-items-center mb-4">
-            <img src="assets/house3.jpg" class="rounded-3 me-3 object-fit-cover" style="width: 120px; height: 120px;">
-            <div>
-              <h6 class="fw-bold mb-1">Luxury High Rise in downtown LA</h6>
-              <small class="text-muted">3.96 (1,221)</small>
-            </div>
-          </div>
-
-          <div class="border rounded-3 mb-3 overflow-hidden">
-            <div class="row g-0 text-center border-bottom">
-            <div class="col p-2 border-end">
-                <small class="d-block fw-bold text-uppercase" style="font-size: 0.7rem;">Check-In</small>
-                <input type="date" class="form-control border-0 p-0 fs-5" value="{{ checkInDate }}" required>
-            </div>
-            <div class="col p-2">
-                <small class="d-block fw-bold text-uppercase" style="font-size: 0.7rem;">Check-Out</small>
-                <input type="date" class="form-control border-0 p-0 fs-5" value="{{ checkOutDate }}" required>
-            </div>
-            </div>
-            
-            <div class="p-2 d-flex justify-content-between align-items-center">
-              <span class="fw-bold px-2">Guests</span>
-              <select formControlName="selectedGuests" class="form-select border-0 w-auto">
-                <option [value]="1">1 guest</option>
-                <option [value]="2">2 guests</option>
-                <option [value]="3">3 guests</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="price-details py-3 border-bottom">
-            <div class="d-flex justify-content-between mb-2">
-              <span>{{ numberOfNights }} nights x ${{ price }}</span>
-              <span>${{ numberOfNights * price }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <span>Taxes</span>
-              <span>${{ taxes }}</span>
-            </div>
-          </div>
-
-          <div class="d-flex justify-content-between pt-3 fw-bold fs-5">
-            <span>Total</span>
-            <span>${{ (numberOfNights * price) + taxes }}</span>
-          </div>
+    @if (error) {
+        <div class="alert alert-danger text-center py-5">
+            <i class="bi bi-exclamation-triangle fs-1"></i>
+            <p class="mt-2">{{ error }}</p>
+            <a routerLink="/listing" class="btn btn-outline-primary mt-3">
+                <i class="bi bi-arrow-left me-2"></i>Browse Listings
+            </a>
         </div>
-      </div>
-    </div>
-  </form>
+    }
+
+    @if (!loading && !error && listing) {
+        <form [formGroup]="bookingForm" (ngSubmit)="onBook()">
+            <div class="row g-5">
+
+                <div class="col-lg-7">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <h2 class="mb-4 fw-bold">Payment</h2>
+
+                        <div class="mb-3">
+                            <input type="text" formControlName="cardNumber"
+                                   class="form-control form-control-lg rounded-pill px-4"
+                                   placeholder="Card number"
+                                   [class.is-invalid]="bookingForm.get('cardNumber')?.invalid && bookingForm.get('cardNumber')?.touched">
+                            @if (bookingForm.get('cardNumber')?.invalid && bookingForm.get('cardNumber')?.touched) {
+                                <div class="invalid-feedback">Enter a valid 16-digit card number</div>
+                            }
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="text" formControlName="holderName"
+                                   class="form-control form-control-lg rounded-pill px-4"
+                                   placeholder="Account Holder name"
+                                   [class.is-invalid]="bookingForm.get('holderName')?.invalid && bookingForm.get('holderName')?.touched">
+                            @if (bookingForm.get('holderName')?.invalid && bookingForm.get('holderName')?.touched) {
+                                <div class="invalid-feedback">Holder name is required</div>
+                            }
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="text" formControlName="expiryMonth"
+                                       class="form-control form-control-lg rounded-pill px-4"
+                                       placeholder="MM"
+                                       [class.is-invalid]="bookingForm.get('expiryMonth')?.invalid && bookingForm.get('expiryMonth')?.touched">
+                            </div>
+                            <div class="col border-start">
+                                <input type="text" formControlName="expiryYear"
+                                       class="form-control form-control-lg rounded-pill px-4"
+                                       placeholder="YYYY"
+                                       [class.is-invalid]="bookingForm.get('expiryYear')?.invalid && bookingForm.get('expiryYear')?.touched">
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <input type="text" formControlName="cvv"
+                                   class="form-control form-control-lg rounded-pill px-4"
+                                   placeholder="CVV"
+                                   [class.is-invalid]="bookingForm.get('cvv')?.invalid && bookingForm.get('cvv')?.touched">
+                            @if (bookingForm.get('cvv')?.invalid && bookingForm.get('cvv')?.touched) {
+                                <div class="invalid-feedback">Enter a valid CVV (3-4 digits)</div>
+                            }
+                        </div>
+
+                        <button class="btn btn-dark btn-lg w-100 py-3 rounded-3 fw-bold"
+                                type="submit"
+                                [disabled]="isSubmitting">
+                            @if (isSubmitting) {
+                                <span class="spinner-border spinner-border-sm me-2"></span>
+                            }
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card border-0 shadow-sm p-4 h-100">
+                        <div class="d-flex align-items-center mb-4">
+                            <img [src]="listing.mainImageUrl" class="rounded-3 me-3 object-fit-cover" style="width: 120px; height: 120px; object-fit: cover;">
+                            <div>
+                                <h6 class="fw-bold mb-1">{{ listing.title }}</h6>
+                                <small class="text-muted">{{ listing.city }}, {{ listing.country }}</small>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-3 mb-3 overflow-hidden">
+                            <div class="row g-0 text-center border-bottom">
+                                <div class="col p-2 border-end">
+                                    <small class="d-block fw-bold text-uppercase" style="font-size: 0.7rem;">Check-In</small>
+                                    <input type="date" id="checkInDate" class="form-control border-0 p-0 fs-6 text-center"
+                                           [value]="checkInDate" (change)="updateDates()" required>
+                                </div>
+                                <div class="col p-2">
+                                    <small class="d-block fw-bold text-uppercase" style="font-size: 0.7rem;">Check-Out</small>
+                                    <input type="date" id="checkOutDate" class="form-control border-0 p-0 fs-6 text-center"
+                                           [value]="checkOutDate" (change)="updateDates()" required>
+                                </div>
+                            </div>
+
+                            <div class="p-2 d-flex justify-content-between align-items-center">
+                                <span class="fw-bold px-2">Guests</span>
+                                <select formControlName="selectedGuests" class="form-select border-0 w-auto" (change)="updateGuests()">
+                                    <option [value]="1">1 guest</option>
+                                    <option [value]="2">2 guests</option>
+                                    <option [value]="3">3 guests</option>
+                                    <option [value]="4">4 guests</option>
+                                    <option [value]="5">5 guests</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="price-details py-3 border-bottom">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>{{ numberOfNights }} nights x ${{ price }}</span>
+                                <span>${{ numberOfNights * price }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Taxes (10%)</span>
+                                <span>${{ taxes }}</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between pt-3 fw-bold fs-5">
+                            <span>Total (USD)</span>
+                            <span>${{ totalPrice + taxes }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
 </div>

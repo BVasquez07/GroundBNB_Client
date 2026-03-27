@@ -1,183 +1,215 @@
-
 <div class="container my-5">
-    <h1 class="fs-1">listing-detail with id: {{ listingId }}</h1>
-    <div class="row g-2"> <div class="col-md-6">
-            <img src="assets/house1.jpg" class="img-fluid rounded w-200 h-200 main-hero-img" alt="Main Layout">
+    @if (loading) {
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3 text-muted">Loading property details...</p>
         </div>
+    }
 
-        <div class="col-md-6">
-            <div class="row g-2">
-                <div class="col-6">
-                    <img src="assets/house2.jpg" class="img-fluid rounded w-100 grid-img" alt="Sub 1">
-                </div>
-                <div class="col-6">
-                    <img src="assets/house2.jpg" class="img-fluid rounded w-100 grid-img" alt="Sub 2">
-                </div>
-                <div class="col-6">
-                    <img src="assets/house2.jpg" class="img-fluid rounded w-100 grid-img" alt="Sub 3">
-                </div>
-                <div class="col-6">
-                    <img src="assets/house2.jpg" class="img-fluid rounded w-100 grid-img" alt="Sub 4">
+    @if (error) {
+        <div class="alert alert-danger text-center py-5">
+            <i class="bi bi-exclamation-triangle fs-1"></i>
+            <p class="mt-2">{{ error }}</p>
+            <a routerLink="/listing" class="btn btn-outline-primary mt-3">
+                <i class="bi bi-arrow-left me-2"></i>Browse all listings
+            </a>
+        </div>
+    }
+
+    @if (!loading && listingData) {
+        <div class="row g-2 mb-4">
+            <div class="col-lg-6">
+                <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 main-hero-img" [alt]="listingData.title" />
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-2">
+                    <div class="col-6">
+                        <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 grid-img" alt="Gallery image 1" />
+                    </div>
+                    <div class="col-6">
+                        <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 grid-img" alt="Gallery image 2" />
+                    </div>
+                    <div class="col-6">
+                        <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 grid-img" alt="Gallery image 3" />
+                    </div>
+                    <div class="col-6">
+                        <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 grid-img" alt="Gallery image 4" />
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
-</div>
+        <div class="row align-items-start g-4">
+            <div class="col-lg-8">
+                <h2 class="h3 mb-1">{{ listingData.title }}</h2>
+                <h3 class="h2 fw-bold mb-2">${{ listingData.price }}/night</h3>
+                <p class="text-muted mb-4">
+                    {{ listingData.description }}
+                </p>
 
-<div class="container">
-    <div class="row justify-content-between align-items-start">
-        
-        <div class="col-auto">
-            <div style="">
-                <div class="card-body">
-                    <h2 class="card-title text-start">Cottage in the Woods!</h2>
-                    <h2 class="card-subtitle mb-2 fw-bold text-start">$50/night</h2>
-                    <p class="card-text text-start">A wonderful cottage nestled in the woods, perfect for a peaceful getaway.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-auto">
-            <div class="card shadow-sm" style="width: 22rem;"> <div class="card-body p-4"> <div class="border rounded mb-3">
-                        
-                        <div class="row g-0 border-bottom"> <div class="col-6 border-end p-3">
-                                <label class="form-label d-block text-muted small mb-0">Check-In</label>
-                                <input type="date" [(ngModel)]="checkInDate" class="form-control border-0 p-0 fs-5" required>
+                <div class="accordion" id="listingAccordion">
+                    <div class="accordion-item mb-3 border rounded shadow-sm">
+                        <h2 class="accordion-header" id="headingDescription">
+                            <button
+                                    class="accordion-button"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseDescription"
+                                    aria-expanded="true"
+                                    aria-controls="collapseDescription"
+                            >
+                                Description
+                            </button>
+                        </h2>
+                        <div
+                                id="collapseDescription"
+                                class="accordion-collapse collapse show"
+                                aria-labelledby="headingDescription"
+                                data-bs-parent="#listingAccordion"
+                        >
+                            <div class="accordion-body">
+                                <p class="mb-3">{{ listingData.description }}</p>
+                                <ul class="mb-0 ps-3">
+                                    <li><strong>Address:</strong> {{ listingData.address }}, {{ listingData.city }}, {{ listingData.state }} {{ listingData.zipCode }}, {{ listingData.country }}</li>
+                                    <li><strong>Hosted by:</strong> GroundBnB Host</li>
+                                    <li><strong>Minimum stay:</strong> 1 night</li>
+                                    <li><strong>Maximum guests:</strong> 4</li>
+                                    <li><strong>Check-in window:</strong> 3:00 PM - 10:00 PM</li>
+                                    <li><strong>Check-out:</strong> 11:00 AM</li>
+                                </ul>
                             </div>
-                            
-                            <div class="col-6 p-3">
-                                <label class="form-label d-block text-muted small mb-0">Check-Out</label>
-                                <input type="date" [(ngModel)]="checkOutDate" class="form-control border-0 p-0 fs-5" value="3/24/2026" required>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item mb-3 border rounded shadow-sm">
+                        <h2 class="accordion-header" id="headingAmenities">
+                            <button
+                                    class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseAmenities"
+                                    aria-expanded="false"
+                                    aria-controls="collapseAmenities"
+                            >
+                                Amenities
+                            </button>
+                        </h2>
+                        <div
+                                id="collapseAmenities"
+                                class="accordion-collapse collapse"
+                                aria-labelledby="headingAmenities"
+                                data-bs-parent="#listingAccordion"
+                        >
+                            <div class="accordion-body">
+                                <ul class="mb-0 ps-3">
+                                    @for (amenity of amenities; track amenity) {
+                                        <li class="mb-1">{{ amenity }}</li>
+                                    }
+                                </ul>
                             </div>
                         </div>
-
-                        <div class="p-3">
-                            <label class="form-label d-block text-muted small mb-0">Guests</label>
-                            <input type="text" [(ngModel)]="guests" class="form-control border-0 p-0 fs-5" value="1" placeholder="1" required>
-                        </div>
-                    </div> <div class="d-grid gap-2"> <button class="btn btn-dark btn-lg" routerLink="/booking" [queryParams]="{ checkIn: checkInDate, checkOut: checkOutDate, guests: guests }" type="button">Reserve</button>
                     </div>
+                </div>
+            </div>
 
+            <div class="col-lg-4">
+                <div class="card shadow-sm booking-sticky">
+                    <div class="card-body p-4">
+                        <div class="border rounded mb-3">
+                            <div class="row g-0 border-bottom">
+                                <div class="col-6 border-end p-3">
+                                    <label class="form-label d-block text-muted small mb-0">Check-In</label>
+                                    <input
+                                            type="date"
+                                            [(ngModel)]="checkInDate"
+                                            (ngModelChange)="onDateChange()"
+                                            class="form-control border-0 p-0 fs-6"
+                                            required
+                                    />
+                                </div>
+                                <div class="col-6 p-3">
+                                    <label class="form-label d-block text-muted small mb-0">Check-Out</label>
+                                    <input
+                                            type="date"
+                                            [(ngModel)]="checkOutDate"
+                                            (ngModelChange)="onDateChange()"
+                                            class="form-control border-0 p-0 fs-6"
+                                            required
+                                    />
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <label class="form-label d-block text-muted small mb-0">Guests</label>
+                                <input type="text" [(ngModel)]="guests" class="form-control border-0 p-0 fs-6" placeholder="1" required />
+                            </div>
+                        </div>
+                        @if (bookingError) {
+                            <div class="alert alert-danger py-2 mb-3">{{ bookingError }}</div>
+                        }
+                        @if (nights > 0 && !bookingError) {
+                            <div class="mb-3 border rounded p-3 bg-light-subtle">
+                                <div class="d-flex justify-content-between small">
+                                    <span>${{ listingData.price }} x {{ nights }} night(s)</span>
+                                    <span>${{ totalPrice }}</span>
+                                </div>
+                                <hr class="my-2" />
+                                <div class="d-flex justify-content-between fw-bold">
+                                    <span>Total</span>
+                                    <span>${{ totalPrice }}</span>
+                                </div>
+                            </div>
+                        }
+                        <div class="d-grid">
+                            <button class="btn btn-dark"
+                                    type="button"
+                                    routerLink="/booking"
+                                    [queryParams]="{
+                                    checkIn: checkInDate,
+                                    checkOut: checkOutDate,
+                                    guests: guests,
+                                    listingId: listingData?.publicId
+                                  }">
+                                Reserve
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
+        <div class="mt-5">
+            <h3 class="h4 fw-bold mb-3">Latest reviews</h3>
+            <div class="row g-3">
+                @if (latestReviews.length > 0) {
+                    @for (review of latestReviews; track review.reviewer + review.date) {
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <div class="mb-2">{{ getStars(review.rating) }}</div>
+                                    <h4 class="h6 fw-bold mb-1">{{ review.title }}</h4>
+                                    <p class="text-muted mb-3">{{ review.body }}</p>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="review-avatar">{{ review.reviewer.charAt(0) }}</div>
+                                        <div>
+                                            <div class="fw-semibold">{{ review.reviewer }}</div>
+                                            <small class="text-muted">{{ review.date }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                } @else {
+                    <div class="col-12">
+                        <div class="text-center py-4 text-muted">
+                            <i class="bi bi-chat-square fs-1"></i>
+                            <p class="mt-2">No reviews yet. Be the first to review this property!</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 </div>
-
-<div class="container text-center mt-5">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="accordion" id="accordionOne">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#contentOne">
-                            Description
-                        </button>
-                    </h2>
-                    <div id="contentOne" class="accordion-collapse collapse show" data-bs-parent="#accordionOne">
-                        <div class="accordion-body">
-                            Content for the first column.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="accordion" id="accordionTwo">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contentTwo">
-                            Amenities
-                        </button>
-                    </h2>
-                    <div id="contentTwo" class="accordion-collapse collapse" data-bs-parent="#accordionTwo">
-                        <div class="accordion-body">
-                            Content for the second column.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="accordion" id="accordionThree">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contentThree">
-                            Reviews
-                        </button>
-                    </h2>
-                    <div id="contentThree" class="accordion-collapse collapse" data-bs-parent="#accordionThree">
-                        <div class="accordion-body">
-                            Content for the third column.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="container mb-5">
-    <h2 class="fs-2 mt-2 mb-2">Latest Review(s)</h2>
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <div class="card mx-5" style="width: 18rem;">
-                <div class="profile-container d-flex flex-column align-items-center">
-                    <div class="profile-circle shadow-sm mb-3">
-                        <img src="assets/headshot.jpg" appImageFallback class="profile-img" alt="User Profile">
-                    </div>
-
-                    <h3 class="h5 fw-bold mb-0">Kumalala</h3>
-                    <p class="text-muted small">Host since 2026</p>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-auto">
-            <div class="card mx-5" style="width: 18rem;">
-                <div class="profile-container d-flex flex-column align-items-center">
-                    <div class="profile-circle shadow-sm mb-3">
-                        <img src="assets/headshot.jpg" appImageFallback class="profile-img" alt="User Profile">
-                    </div>
-
-                    <h3 class="h5 fw-bold mb-0">Kumalala</h3>
-                    <p class="text-muted small">Host since 2026</p>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-auto">
-            <div class="card mx-5" style="width: 18rem;">
-                <div class="profile-container d-flex flex-column align-items-center">
-                    <div class="profile-circle shadow-sm mb-3">
-                        <img src="assets/headshot.jpg" appImageFallback class="profile-img" alt="User Profile">
-                    </div>
-
-                    <h3 class="h5 fw-bold mb-0">Kumala Savesta</h3>
-                    <p class="text-muted small">Host since 2026</p>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-

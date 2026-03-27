@@ -1,1 +1,65 @@
-<p>booking-widget works!</p>
+<div class="card shadow-sm booking-sticky">
+    <div class="card-body p-4">
+        <div class="border rounded mb-3">
+            <div class="row g-0 border-bottom">
+                <div class="col-6 border-end p-3">
+                    <label class="form-label d-block text-muted small mb-0">Check-In</label>
+                    <input
+                            type="date"
+                            [(ngModel)]="checkInDate"
+                            (ngModelChange)="calculateTotalPrice()"
+                            class="form-control border-0 p-0 fs-6"
+                            required
+                    />
+                </div>
+                <div class="col-6 p-3">
+                    <label class="form-label d-block text-muted small mb-0">Check-Out</label>
+                    <input
+                            type="date"
+                            [(ngModel)]="checkOutDate"
+                            (ngModelChange)="calculateTotalPrice()"
+                            class="form-control border-0 p-0 fs-6"
+                            required
+                    />
+                </div>
+            </div>
+            <div class="p-3">
+                <label class="form-label d-block text-muted small mb-0">Guests</label>
+                <input
+                        type="number"
+                        min="1"
+                        [(ngModel)]="guests"
+                        class="form-control border-0 p-0 fs-6"
+                        required
+                />
+            </div>
+        </div>
+
+        @if (bookingError) {
+            <div class="alert alert-danger py-2 mb-3">{{ bookingError }}</div>
+        }
+
+        @if (nights > 0 && !bookingError) {
+            <div class="mb-3 border rounded p-3 bg-light-subtle">
+                <div class="d-flex justify-content-between small">
+                    <span>${{ listing.price }} x {{ nights }} night(s)</span>
+                    <span>${{ totalPrice }}</span>
+                </div>
+                <hr class="my-2" />
+                <div class="d-flex justify-content-between fw-bold">
+                    <span>Total</span>
+                    <span>${{ totalPrice }}</span>
+                </div>
+            </div>
+        }
+
+        <div class="d-grid">
+            <button class="btn btn-dark" type="button" (click)="onBook()" [disabled]="isSubmitting">
+                @if (isSubmitting) {
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                }
+                Reserve
+            </button>
+        </div>
+    </div>
+</div>

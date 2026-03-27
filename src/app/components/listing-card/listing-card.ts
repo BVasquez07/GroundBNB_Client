@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-property-card',
   imports: [],
-  templateUrl: './property-card.html',
-  styleUrl: './property-card.scss',
+  templateUrl: './listing-card.html',
+  styleUrl: './listing-card.scss',
 })
-export class PropertyCard {}
+export class ListingCard {}
