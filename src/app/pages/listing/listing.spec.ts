@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Listing } from './listing';
+import { ListingData } from './listing';
 
-describe('Listing', () => {
-  let component: Listing;
-  let fixture: ComponentFixture<Listing>;
+describe('ListingData', () => {
+  let component: ListingData;
+  let fixture: ComponentFixture<ListingData>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

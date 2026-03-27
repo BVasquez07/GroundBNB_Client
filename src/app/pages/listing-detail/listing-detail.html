@@ -21,21 +21,21 @@
     @if (!loading && listingData) {
         <div class="row g-2 mb-4">
             <div class="col-lg-6">
-                <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 main-hero-img" [alt]="listingData.title" />
+                <img [src]="galleryImages[0]" class="img-fluid rounded w-100 main-hero-img" [alt]="listingData.title" />
             </div>
             <div class="col-lg-6">
                 <div class="row g-2">
                     <div class="col-6">
-                        <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 grid-img" alt="Gallery image 1" />
+                        <img [src]="galleryImages[1]" class="img-fluid rounded w-100 grid-img" alt="Gallery image 1" />
                     </div>
                     <div class="col-6">
-                        <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 grid-img" alt="Gallery image 2" />
+                        <img [src]="galleryImages[2]" class="img-fluid rounded w-100 grid-img" alt="Gallery image 2" />
                     </div>
                     <div class="col-6">
-                        <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 grid-img" alt="Gallery image 3" />
+                        <img [src]="galleryImages[3]" class="img-fluid rounded w-100 grid-img" alt="Gallery image 3" />
                     </div>
                     <div class="col-6">
-                        <img [src]="listingData.mainImageUrl" class="img-fluid rounded w-100 grid-img" alt="Gallery image 4" />
+                        <img [src]="galleryImages[4]" class="img-fluid rounded w-100 grid-img" alt="Gallery image 4" />
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                   checkIn: checkInDate,
                   checkOut: checkOutDate,
                   guests: guests,
-                  listingId: listingData?.publicId
+                  listingId: listingData.publicId
                 }">
                                 Reserve
                             </button>

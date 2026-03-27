@@ -7,7 +7,7 @@ import {
   Reservation,
 } from "../../core/services/reservationService";
 import { ListingService } from "../../core/services/listingService";
-import { Listing } from "../listing/listing";
+import { ListingData } from "../listing/listing";
 
 interface Review {
   id: number;
@@ -33,7 +33,7 @@ export class Profile implements OnInit {
   user: User | null = null;
   reservations: Reservation[] = [];
   reviews: Review[] = [];
-  listings: Listing[] = [];
+  listings: ListingData[] = [];
 
   loadingReservations: boolean = true;
   loadingReviews: boolean = true;
@@ -62,7 +62,13 @@ export class Profile implements OnInit {
   loadReservations() {
     this.reservationService.getUserReservations().subscribe({
       next: (data) => {
-        this.reservations = data;
+        this.reservations = data.map((reservation) => ({
+          ...reservation,
+          listingImageUrl: this.listingService.getListingMainImage(
+            reservation.listingPublicId,
+            reservation.listingImageUrl,
+          ),
+        }));
         this.loadingReservations = false;
       },
       error: (err) => {
@@ -82,7 +88,13 @@ export class Profile implements OnInit {
   loadListings() {
     this.listingService.getAllListings().subscribe({
       next: (data) => {
-        this.listings = data;
+        this.listings = data.map((listing) => ({
+          ...listing,
+          mainImageUrl: this.listingService.getListingMainImage(
+            listing.publicId,
+            listing.mainImageUrl,
+          ),
+        }));
         this.loadingListings = false;
       },
       error: (err) => {

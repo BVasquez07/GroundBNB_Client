@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { ListingService } from "../../core/services/listingService";
-import { Listing } from "../listing/listing";
+import { ListingData } from "../listing/listing";
 
 @Component({
   selector: "app-listing-detail",
@@ -16,7 +16,7 @@ export class ListingDetail implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private listingService = inject(ListingService);
 
-  listingData: Listing | null = null;
+  listingData: ListingData | null = null;
   loading: boolean = true;
   error: string = "";
 
@@ -44,6 +44,8 @@ export class ListingDetail implements OnInit {
 
   latestReviews: any[] = [];
 
+  galleryImages: string[] = [];
+
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params) => {
       const publicId = params.get("publicId");
@@ -62,6 +64,29 @@ export class ListingDetail implements OnInit {
     this.listingService.getListingByPublicId(publicId).subscribe({
       next: (data) => {
         this.listingData = data;
+
+        const firstFive = this.listingService.getFirstFivePublicIds();
+        const index = firstFive.indexOf(publicId);
+        if (index !== -1) {
+          const basePath = `/assets/listings/listing${index + 1}`;
+          this.listingData.mainImageUrl = `${basePath}/main.png`;
+          this.galleryImages = [
+            `${basePath}/main.png`,
+            `${basePath}/secondary.png`,
+            `${basePath}/third.png`,
+            `${basePath}/fourth.png`,
+            `${basePath}/fifth.png`,
+          ];
+        } else {
+          // Fallback to existing logic if not in first 5
+          this.galleryImages = [
+            data.mainImageUrl,
+            data.mainImageUrl,
+            data.mainImageUrl,
+            data.mainImageUrl,
+            data.mainImageUrl,
+          ];
+        }
 
         if (data.reviews && data.reviews.length > 0) {
           this.latestReviews = data.reviews.map((review) => ({

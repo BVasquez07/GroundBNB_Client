@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterLink } from "@angular/router";
 import { ListingService, Review } from "../../core/services/listingService";
 
-export interface Listing {
+export interface ListingData {
   publicId: string;
   title: string;
   description: string;
@@ -35,8 +35,8 @@ export class Listing implements OnInit {
     "/assets/listings/event1.jpg",
   ];
 
-  allListings: Listing[] = [];
-  filteredListings: Listing[] = [];
+  allListings: ListingData[] = [];
+  filteredListings: ListingData[] = [];
   error: string = "";
 
   searchQuery: string = "";
@@ -58,7 +58,7 @@ export class Listing implements OnInit {
     this.listingService.getAllListings().subscribe({
       next: (data) => {
         this.allListings = data;
-        this.filteredListings = data;
+        this.filteredListings = [...data];
         this.extractCities();
       },
       error: () => {
@@ -149,9 +149,17 @@ export class Listing implements OnInit {
   }
 
   getListingImage(
-    listing: Partial<Listing> | null | undefined,
+    listing: Partial<ListingData> | null | undefined,
     fallbackIndex: number,
   ): string {
+    const firstFive = this.listingService.getFirstFivePublicIds();
+    if (listing?.publicId) {
+      const index = firstFive.indexOf(listing.publicId);
+      if (index !== -1) {
+        return `/assets/listings/listing${index + 1}/main.png`;
+      }
+    }
+
     const key =
       listing?.publicId ||
       listing?.title ||

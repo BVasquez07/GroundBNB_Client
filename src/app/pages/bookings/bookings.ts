@@ -13,7 +13,7 @@ import {
 } from "../../core/services/reservationService";
 import { ListingService } from "../../core/services/listingService";
 import { AuthService } from "../../core/services/authService";
-import { Listing } from "../listing/listing";
+import { ListingData } from "../listing/listing";
 
 @Component({
   selector: "app-bookings",
@@ -35,7 +35,7 @@ export class Bookings implements OnInit {
   checkOutDate: string = "";
   guests: number = 1;
   listingId: string = "";
-  listing: Listing | null = null;
+  listing: ListingData | null = null;
   price: number = 0;
   numberOfNights: number = 0;
   totalPrice: number = 0;
@@ -78,6 +78,10 @@ export class Bookings implements OnInit {
   loadListing() {
     this.listingService.getListingByPublicId(this.listingId).subscribe({
       next: (data) => {
+        data.mainImageUrl = this.listingService.getListingMainImage(
+          data.publicId,
+          data.mainImageUrl,
+        );
         this.listing = data;
         this.price = data.price;
         this.calculateTotal();

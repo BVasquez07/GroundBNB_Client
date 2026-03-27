@@ -15,6 +15,7 @@ export interface Reservation {
   id: number;
   listingTitle: string;
   listingImageUrl: string;
+  listingPublicId?: string;
   checkInDate: string;
   checkOutDate: string;
   guests: number;
