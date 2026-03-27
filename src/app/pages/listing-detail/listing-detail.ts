@@ -97,6 +97,8 @@ export class ListingDetail implements OnInit {
     return stars;
   }
 
+  today = new Date().toISOString().split("T")[0];
+
   onDateChange(): void {
     this.bookingError = "";
     this.nights = 0;
@@ -108,6 +110,14 @@ export class ListingDetail implements OnInit {
 
     const checkIn = new Date(this.checkInDate);
     const checkOut = new Date(this.checkOutDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (checkIn < today) {
+      this.bookingError = "Check-in date cannot be in the past.";
+      return;
+    }
+
     const msPerDay = 1000 * 60 * 60 * 24;
     const diffDays = Math.ceil(
       (checkOut.getTime() - checkIn.getTime()) / msPerDay,

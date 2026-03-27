@@ -126,6 +126,7 @@
                                             [(ngModel)]="checkInDate"
                                             (ngModelChange)="onDateChange()"
                                             class="form-control border-0 p-0 fs-6"
+                                            [min]="today"
                                             required
                                     />
                                 </div>
@@ -136,41 +137,56 @@
                                             [(ngModel)]="checkOutDate"
                                             (ngModelChange)="onDateChange()"
                                             class="form-control border-0 p-0 fs-6"
+                                            [min]="checkInDate || today"
                                             required
                                     />
                                 </div>
                             </div>
                             <div class="p-3">
                                 <label class="form-label d-block text-muted small mb-0">Guests</label>
-                                <input type="text" [(ngModel)]="guests" class="form-control border-0 p-0 fs-6" placeholder="1" required />
+                                <input
+                                        type="number"
+                                        [(ngModel)]="guests"
+                                        class="form-control border-0 p-0 fs-6"
+                                        min="1"
+                                        max="10"
+                                        required
+                                />
                             </div>
                         </div>
+
                         @if (bookingError) {
                             <div class="alert alert-danger py-2 mb-3">{{ bookingError }}</div>
                         }
-                        @if (nights > 0 && !bookingError) {
-                            <div class="mb-3 border rounded p-3 bg-light-subtle">
-                                <div class="d-flex justify-content-between small">
-                                    <span>${{ listingData.price }} x {{ nights }} night(s)</span>
-                                    <span>${{ totalPrice }}</span>
+
+                        @if (checkInDate && checkOutDate && !bookingError) {
+                            @if (nights > 0) {
+                                <div class="mb-3 border rounded p-3 bg-light-subtle">
+                                    <div class="d-flex justify-content-between small">
+                                        <span>${{ listingData.price }} x {{ nights }} night(s)</span>
+                                        <span>${{ totalPrice }}</span>
+                                    </div>
+                                    <hr class="my-2" />
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span>Total</span>
+                                        <span>${{ totalPrice }}</span>
+                                    </div>
                                 </div>
-                                <hr class="my-2" />
-                                <div class="d-flex justify-content-between fw-bold">
-                                    <span>Total</span>
-                                    <span>${{ totalPrice }}</span>
-                                </div>
-                            </div>
+                            }
                         }
+
                         <div class="d-grid">
-                            <button class="btn btn-dark"
+                            <button
+                                    class="btn btn-dark"
                                     type="button"
+                                    [disabled]="!checkInDate || !checkOutDate || nights <= 0"
                                     routerLink="/booking"
                                     [queryParams]="{
-                                    checkIn: checkInDate,
-                                    checkOut: checkOutDate,
-                                    guests: guests,
-                                    listingId: listingData?.publicId
-                                  }">
+                  checkIn: checkInDate,
+                  checkOut: checkOutDate,
+                  guests: guests,
+                  listingId: listingData?.publicId
+                }">
                                 Reserve
                             </button>
                         </div>
