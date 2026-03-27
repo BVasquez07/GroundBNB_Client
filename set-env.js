@@ -18,4 +18,3 @@ if (!fs.existsSync(path.dirname(targetPath))) {
 }
 
 fs.writeFileSync(targetPath, envFile);
-console.log(`Environment file generated at ${targetPath}`);

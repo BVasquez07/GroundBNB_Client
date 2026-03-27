@@ -36,4 +36,5 @@ export class Footer {
     "Developers",
     "Resource library",
   ];
+  currentYear = new Date().getFullYear();
 }

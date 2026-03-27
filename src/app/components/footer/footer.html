@@ -1,37 +1,73 @@
-<footer class="footer">
-  <div class="footer__social d-flex gap-2">
-    <a href="#" class="footer__social-link btn btn-light shadow-sm rounded-circle p-2" aria-label="X (Twitter)">
-      <img src="/assets/icons/x-logo.png" appImageFallback alt="X" />
-    </a>
-    <a href="#" class="footer__social-link btn btn-light shadow-sm rounded-circle p-2" aria-label="Instagram">
-      <img src="/assets/icons/instagram.png" appImageFallback alt="Instagram" />
-    </a>
-    <a href="#" class="footer__social-link btn btn-light shadow-sm rounded-circle p-2" aria-label="YouTube">
-      <img src="/assets/icons/youtube.png" appImageFallback alt="YouTube" />
-    </a>
-    <a href="#" class="footer__social-link btn btn-light shadow-sm rounded-circle p-2" aria-label="LinkedIn">
-      <img src="/assets/icons/facebook.png" appImageFallback alt="Facebook" />
-    </a>
-  </div>
+<footer class="footer bg-white border-top pt-5 pb-4 mt-auto">
+    <div class="container">
+        <div class="row text-center text-md-start">
+            <div class="col-md-12 text-center mb-4">
+                <div class="footer__social d-flex justify-content-center gap-3">
+                    <a href="#" class="btn btn-outline-secondary btn-floating rounded-circle p-2" aria-label="X (Twitter)">
+                        <img src="/assets/icons/x-logo.png" appImageFallback alt="X" width="20" height="20">
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary btn-floating rounded-circle p-2" aria-label="Instagram">
+                        <img src="/assets/icons/instagram.png" appImageFallback alt="Instagram" width="20" height="20">
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary btn-floating rounded-circle p-2" aria-label="YouTube">
+                        <img src="/assets/icons/youtube.png" appImageFallback alt="YouTube" width="20" height="20">
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary btn-floating rounded-circle p-2" aria-label="Facebook">
+                        <img src="/assets/icons/facebook.png" appImageFallback alt="Facebook" width="20" height="20">
+                    </a>
+                </div>
+            </div>
+        </div>
 
-  <div class="footer__links">
-    <h4 class="footer__links-title">Use cases</h4>
-    @for (link of useCaseLinks; track link) {
-      <a href="#" class="footer__link">{{ link }}</a>
-    }
-  </div>
+        <div class="row gy-4 text-center text-md-start">
+            <div class="col-md-4">
+                <div class="footer__links">
+                    <h4 class="fw-bold mb-3 text-dark">Use cases</h4>
+                    <ul class="list-unstyled">
+                        @for (link of useCaseLinks; track link) {
+                            <li class="mb-2">
+                                <a href="#" class="text-secondary text-decoration-none hover-underline">{{ link }}</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
 
-  <div class="footer__links">
-    <h4 class="footer__links-title">Explore</h4>
-    @for (link of exploreLinks; track link) {
-      <a href="#" class="footer__link">{{ link }}</a>
-    }
-  </div>
+            <div class="col-md-4">
+                <div class="footer__links">
+                    <h4 class="fw-bold mb-3 text-dark">Explore</h4>
+                    <ul class="list-unstyled">
+                        @for (link of exploreLinks; track link) {
+                            <li class="mb-2">
+                                <a href="#" class="text-secondary text-decoration-none hover-underline">{{ link }}</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
 
-  <div class="footer__links">
-    <h4 class="footer__links-title">Resources</h4>
-    @for (link of resourceLinks; track link) {
-      <a href="#" class="footer__link">{{ link }}</a>
-    }
-  </div>
+            <div class="col-md-4">
+                <div class="footer__links">
+                    <h4 class="fw-bold mb-3 text-dark">Resources</h4>
+                    <ul class="list-unstyled">
+                        @for (link of resourceLinks; track link) {
+                            <li class="mb-2">
+                                <a href="#" class="text-secondary text-decoration-none hover-underline">{{ link }}</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row text-center">
+            <div class="col-12">
+                <p class="text-secondary small mb-0">
+                    &copy; {{ currentYear }} GroundBnB. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </div>
 </footer>

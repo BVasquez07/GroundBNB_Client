@@ -1,32 +1,116 @@
 <div class="profile-container d-flex flex-column align-items-center">
-  <div class="profile-circle shadow-sm mb-3">
-    <img src="assets/headshot.jpg" 
-         appImageFallback 
-         class="profile-img" 
-         alt="User Profile">
-  </div>
-  
-  <h3 class="h5 fw-bold mb-0">Kumalala</h3>
-  <p class="text-muted small">Host since 2026</p>
+    <div class="profile-circle shadow-sm mb-3">
+            <img src="/assets/headshot.jpg"
+                 class="profile-img"
+                 alt="avatar">
+    </div>
+
+    <h3 class="h5 fw-bold mb-0">{{ user?.fullName || user?.firstName + ' ' + user?.lastName }}</h3>
 </div>
 
-<div class="container text-center">
-    <div class="row">
-        <div class="col" *ngFor="let item of pastExperienceReviews">
-            <div class="card" style="width: 18rem;">
-                <img src="{{ item.Image }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ item.experienceTitle }}</h5>
-                    <a *ngIf="!item.gaveRating"  class="btn btn-primary">Give Rating</a>
-                    <p class="card-text fw-bold">${{ item.price }}</p>
+<div class="container mt-4">
+    <ul class="nav nav-tabs mb-4" id="profileTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="reservations-tab" data-bs-toggle="tab" data-bs-target="#reservations" type="button" role="tab">
+                <i class="bi bi-calendar-check me-2"></i>My Reservations
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">
+                <i class="bi bi-star me-2"></i>My Reviews
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="reservations" role="tabpanel">
+            @if (loadingReservations) {
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
-            </div>
+            } @else if (reservations.length === 0) {
+                <div class="text-center py-5">
+                    <i class="bi bi-calendar-x fs-1 text-muted"></i>
+                    <p class="text-muted mt-2">No reservations yet. Start booking your first stay!</p>
+                    <a routerLink="/listing" class="btn btn-primary mt-2">Browse Listings</a>
+                </div>
+            } @else {
+                <div class="row g-4">
+                    @for (reservation of reservations; track reservation.id) {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 shadow-sm border-0">
+                                <img [src]="reservation.listingImageUrl" class="card-img-top" [alt]="reservation.listingTitle" style="height: 180px; object-fit: cover;">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="card-title fw-bold mb-0">{{ reservation.listingTitle }}</h5>
+                                        <span class="badge" [ngClass]="{
+                      'bg-success': reservation.status === 'CONFIRMED',
+                      'bg-warning': reservation.status === 'PENDING',
+                      'bg-danger': reservation.status === 'CANCELLED'
+                    }">{{ reservation.status }}</span>
+                                    </div>
+                                    <p class="card-text text-muted small mb-2">
+                                        <i class="bi bi-calendar me-1"></i>
+                                        {{ reservation.checkInDate | date:'MMM d, yyyy' }} - {{ reservation.checkOutDate | date:'MMM d, yyyy' }}
+                                    </p>
+                                    <p class="card-text text-muted small mb-2">
+                                        <i class="bi bi-people me-1"></i>
+                                        {{ reservation.guests }} guest(s)
+                                    </p>
+                                    <p class="card-text fw-bold text-primary mb-0">
+                                        ${{ reservation.totalPrice }}
+                                    </p>
+                                </div>
+                                <div class="card-footer bg-white border-0 pb-3">
+                                    @if (reservation.status === 'CONFIRMED') {
+                                        <button class="btn btn-outline-danger btn-sm w-100" (click)="cancelReservation(reservation.id)">
+                                            Cancel Reservation
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="tab-pane fade" id="reviews" role="tabpanel">
+            @if (loadingReviews) {
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            } @else if (reviews.length === 0) {
+                <div class="text-center py-5">
+                    <i class="bi bi-chat-square fs-1 text-muted"></i>
+                    <p class="text-muted mt-2">No reviews yet. Your reviews will appear here.</p>
+                </div>
+            } @else {
+                <div class="row g-4">
+                    @for (review of reviews; track review.id) {
+                        <div class="col-md-6">
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="rating">
+                                            @for (star of getStars(review.rating); track $index) {
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            }
+                                        </div>
+                                        <small class="text-muted">{{ review.createdAt | date:'MMM d, yyyy' }}</small>
+                                    </div>
+                                    <h6 class="fw-bold mb-1">{{ review.listingTitle }}</h6>
+                                    <p class="text-muted mb-0">{{ review.comment }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
         </div>
     </div>
 </div>
-
-
-
-
-
-

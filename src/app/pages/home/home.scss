@@ -1,20 +1,28 @@
 .hero-section {
-  /* The image path */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/hero.jpg');
-  
-  /* Standard centering and scaling */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   padding: 40px 20px;
   
-
-  
-  /* Ensure text is readable */
   color: white !important;
 }
 
 .hero-section .text-body-emphasis, 
 .hero-section .lead {
   color: white !important;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+.card-img-top {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
 }
