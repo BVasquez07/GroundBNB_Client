@@ -13,7 +13,6 @@ export class ImageFallbackDirective {
   loadFallback() {
     const element: HTMLImageElement = this.eRef.nativeElement;
 
-    // Prevent a retry loop if the fallback image also fails.
     if (element.dataset["fallbackApplied"] === "true") {
       return;
     }

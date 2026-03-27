@@ -78,7 +78,6 @@ export class ListingDetail implements OnInit {
             `${basePath}/fifth.png`,
           ];
         } else {
-          // Fallback to existing logic if not in first 5
           this.galleryImages = [
             data.mainImageUrl,
             data.mainImageUrl,
