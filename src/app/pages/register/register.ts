@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { AuthService } from "../../core/services/authService";
 
 @Component({
   selector: "app-register",
@@ -25,6 +26,7 @@ export class Register {
   constructor(
     private router: Router,
     private http: HttpClient,
+    private authService: AuthService,
   ) {}
 
   register() {
@@ -58,7 +60,7 @@ export class Register {
     this.http
       .post("http://localhost:8080/api/customers/signup", registerData)
       .subscribe({
-        next: (response) => {
+        next: () => {
           this.success = "Registration successful! Redirecting to login...";
           this.loading = false;
 
@@ -73,10 +75,30 @@ export class Register {
           }, 2000);
         },
         error: (error) => {
-          this.error =
-            error.error?.message || "Registration failed. Please try again.";
+          this.error = this.resolveRegisterError(error);
           this.loading = false;
         },
       });
+  }
+
+  signInWithGoogle() {
+    this.authService.googleLogin();
+  }
+
+  private resolveRegisterError(error: HttpErrorResponse): string {
+    const backendMessage =
+      typeof error.error === "string" ? error.error : error.error?.message;
+    const normalizedMessage = backendMessage?.toLowerCase() || "";
+
+    if (
+      error.status === 409 ||
+      normalizedMessage.includes("already") ||
+      normalizedMessage.includes("exists") ||
+      normalizedMessage.includes("duplicate")
+    ) {
+      return "This email is already registered.";
+    }
+
+    return backendMessage || "Registration failed. Please try again.";
   }
 }

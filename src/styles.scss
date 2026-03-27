@@ -3,7 +3,7 @@
 $my-theme-overrides: (
   "primary": #353433, 
   "enable-shadows": true,
-  "border-radius": 10px     // Sharp, jagged edges
+  "border-radius": 10px
 );
 
 @use "bootstrap/scss/bootstrap" with (

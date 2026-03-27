@@ -1,25 +1,18 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { HeroImage } from '../../components/hero-image/hero-image';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { Router, RouterLink, ActivatedRoute } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-
-interface LoginResponse {
-  token: string;
-  publicId: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-}
+import { HttpErrorResponse } from "@angular/common/http";
+import { CommonModule } from "@angular/common";
+import { AuthService, LoginResponse } from "../../core/services/authService";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: "./login.html",
   styleUrl: "./login.scss",
 })
-export class Login {
+export class Login implements OnInit {
   email: string = "";
   password: string = "";
   error: string = "";
@@ -27,52 +20,62 @@ export class Login {
 
   constructor(
     private router: Router,
-    private http: HttpClient,
+    private route: ActivatedRoute,
+    private authService: AuthService,
   ) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      if (params["token"]) {
+        this.authService.handleOAuthCallback(params);
+        const publicId = this.authService.getPublicId();
+        this.router.navigate(["/profile", publicId]);
+      }
+    });
+  }
 
   login() {
     this.loading = true;
     this.error = "";
 
-    const loginData = {
-      email: this.email,
-      password: this.password,
-    };
-
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-    });
-
-    this.http
-      .post<LoginResponse>(
-        "http://localhost:8080/api/customers/login",
-        loginData,
-        {
-          headers: headers,
-        },
-      )
+    this.authService
+      .login({
+        email: this.email,
+        password: this.password,
+      })
       .subscribe({
-        next: (response) => {
-          localStorage.setItem("jwt_token", response.token);
-          localStorage.setItem("customer_public_id", response.publicId);
-          localStorage.setItem("customer_email", response.email);
-          localStorage.setItem("customer_first_name", response.firstName);
-          localStorage.setItem("customer_last_name", response.lastName);
+        next: (response: LoginResponse) => {
+          this.authService.setAuthData(response);
           this.router.navigate(["/profile", response.publicId]);
-
           this.loading = false;
         },
-        error: (error) => {
-          console.log(error);
-          if (error.error) {
-            this.error = error.error;
-          } else if (error.message) {
-            this.error = error.message;
-          } else {
-            this.error = "Invalid email or password";
-          }
+        error: (error: HttpErrorResponse) => {
+          this.error = this.resolveLoginError(error);
           this.loading = false;
         },
       });
+  }
+
+  signInWithGoogle() {
+    this.authService.googleLogin();
+  }
+
+  private resolveLoginError(error: HttpErrorResponse): string {
+    const backendMessage =
+      typeof error.error === "string" ? error.error : error.error?.message;
+    const normalizedMessage = backendMessage?.toLowerCase() || "";
+
+    if (
+      error.status === 401 ||
+      error.status === 403 ||
+      normalizedMessage.includes("invalid") ||
+      normalizedMessage.includes("bad credentials") ||
+      normalizedMessage.includes("wrong password") ||
+      normalizedMessage.includes("not found")
+    ) {
+      return "Invalid email or password.";
+    }
+
+    return backendMessage || "Login failed. Please try again.";
   }
 }
