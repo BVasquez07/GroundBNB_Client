@@ -2,6 +2,15 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
 
+## Related Repositories
+
+This project is part of a full-stack application:
+
+- **Frontend (this repo):** Angular client
+- **Backend (Spring Boot + MySQL):** [https://github.com/nadirgrib95/GroundBnB](https://github.com/nadirgrib95/GroundBnB)
+
+Make sure to clone and run both repositories to have the complete application running.
+
 ## Development server
 
 To start a local development server, run:
